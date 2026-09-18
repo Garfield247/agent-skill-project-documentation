@@ -53,6 +53,7 @@ docs/ (或项目自适应命中的既有文档目录)
 │   ├── 00_global_standards_and_redlines.md    # 核心总纲：实体字典、枚举规范、单一职责、上帝文件禁止红线
 │   ├── entity_dictionary.md                   # 核心业务实体标准命名、字段名、废弃禁用词对照字典
 │   ├── enums_reference.md                     # 全局领域枚举对照字典 (底层 tinyint vs 外部 string 双向转换)
+│   ├── pkg_hierarchy_standards.md             # 🏛️ pkg 基础层分层架构标准 (一级分类收紧，二级视情况按需嵌套)
 │   ├── coding_redlines.md                     # 工程红线清单 (禁止上帝文件、单文件行数软硬阈值、防重锁粒度)
 │   └── architectural_guardrails.md            # 架构反模式禁令 (严禁静默重试/兜底、严禁跨层穿透、严禁无状态破坏)
 │
