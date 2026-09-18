@@ -2,9 +2,8 @@
 name: project-documentation
 description: >-
   人机双重视角项目技术文档体系、分类分层目录治理、00 号标准约束与红线第一法则、
-  AI 进场首读规范、Agent 上下文地图与 Mermaid 图表防崩渲染生产级规范技能。
-  支持工程文档目录自适应智能探测 (不硬编码目录名)、数字优先级分层目录结构、
-  术语与枚举字典、单一职责与上帝文件拆分红线及 Mermaid 4 大防崩语法铁律。
+  高价值 BUG 案例与深度避坑档案 (Post-Mortems)、AI 进场首读规范、
+  Agent 上下文地图与 Mermaid 图表防崩渲染生产级规范技能。
 ---
 
 # 项目技术文档治理与 Mermaid 渲染规范技能 (Project Documentation Skill)
@@ -13,23 +12,10 @@ description: >-
 
 本技能定义了研发工程师与 AI 编码助手在为软件工程编写、维护技术文档与架构图表时的通用工业级标准。
 
-核心突破在于：**摆脱传统文档仅面向人类的单一视角，构建“人类工程师 (Human-Facing) + AI Agent (Agent-Facing)”双重视角的文档与知识库体系**。同时确立**“标准约束与工程红线第一法则 (Standards & Redlines First Principle)”**，让 AI 结对伙伴在接手项目时首先建立严密的规则防线与边界共识，彻底杜绝凭感觉编码、制造上帝文件与违反架构红线。
-
-### 核心设计原则
-
-1. **标准约束与工程红线第一法则 (Standards & Redlines First Principle - P0 必读基石)**：
-   - 项目的“术语映射、核心枚举、分层职责、单文件行数与上帝文件拆分红线、架构反模式禁令”是全工程的宪章总纲；
-   - **AI Agent 在操作项目时，必须首先查阅此规范，建立绝对边界认知后，方可阅读需求与实现代码**。
-2. **数字优先级分层子目录治理 (Numbered Hierarchy)**：
-   - 采用业界大型工程标杆的编号分层结构（`00_standards/` -> `01_requirements/` -> `02_architecture/` -> `03_api/` -> `04_operations/` -> `05_agent_context/`），层级清晰，权重分明。
-3. **目录非硬编码自适应探测 (Folder-Agnostic Discovery)**：
-   - 智能探测识别项目既有文档目录（`docs/`、`wiki/`、`documentation/`），尊重项目存量风格，严禁擅自新建别名目录。
-4. **人机双重视角架构 (Dual-Audience Architecture)**：
-   - 既提供人类可读的业务全景与物理拓扑，又专门为 AI 编码助手建立高密度的物理路径映射与上下文锚点。
-5. **增量维护与完整性原则 (Incremental & Non-Destructive)**：
-   - 严禁未经确认直接清空或盲目覆写已有重要章节，代码与文档同生命周期绑定更新。
-6. **Mermaid 渲染防坑 4 大铁律 (Zero-Crash Diagramming)**：
-   - 严格遵循规避各类 Markdown 解析器词法崩溃的语法安全边界。
+核心突破在于：**摆脱传统文档仅面向人类的单一视角，构建“人类工程师 (Human-Facing) + AI Agent (Agent-Facing)”双重视角的文档与知识库体系**。
+同时确立两大核心基石：
+1. **“标准约束与工程红线第一法则 (Standards & Redlines First Principle)”**：AI 进场优先学习全局规范宪章；
+2. **“高价值 BUG 案例与深度避坑档案 (High-Value Bug Cases & Gotchas Archive)”**：将生产踩坑转化为永久免疫资产，坚决杜绝同类故障二次发生。
 
 ---
 
@@ -75,17 +61,20 @@ docs/ (或项目自适应命中的既有文档目录)
 │   ├── system_topology.md                     # 物理部署、微服务交互拓扑与网络边界
 │   ├── domain_models.md                       # 领域实体关系图 (ER)、数据库表结构与分表规划
 │   ├── workflow_and_fsm.md                    # 核心业务交互时序图 (Mermaid) 与有限状态机 (FSM) 跃迁图
-│   └── adr_decisions.md                       # 架构决策记录 (ADR) 与既往填坑结论 (Why & Gotchas)
+│   └── adr_decisions.md                       # 架构决策记录 (ADR) 与既往架构折中 (Why & Gotchas)
 │
 ├── 03_api/                                    # 【P3 级协议契约】接口契约与通信协议
 │   ├── http_contracts.md                      # RESTful API 契约、路由分组、统一响应格式与业务错误码
 │   ├── rpc_protocols.md                       # gRPC / Protobuf 微服务内部通信契约
 │   └── event_streams.md                       # 消息队列 (Kafka/RabbitMQ) 事件 Schema 与 WebSocket 协议
 │
-├── 04_operations/                             # 【P4 级实操指南】研发实战、配置与运维排障
+├── 04_operations/                             # 【P4 级实操与避坑】研发实战、配置与高价值故障档案
 │   ├── local_development.md                   # 本地环境搭建、依赖中间件拉起与启动步骤
 │   ├── configuration_dictionary.md            # 配置文件参数字典与环境变量映射表
-│   └── troubleshooting_faq.md                 # 常见线上故障定位 SOP、核心排障命令与日志排查速查
+│   ├── troubleshooting_faq.md                 # 常见日常排错速查与诊断命令
+│   └── post_mortems/                          # 🩺【核心资产：高价值 BUG 案例与深度避坑档案】
+│       ├── README.md                          # 经典案例目录索引与避坑知识图谱
+│       └── case_YYYYMMDD_<topic>.md           # 经典案例深度复盘 (机理剖析、反例对比、永久免疫防线)
 │
 └── 05_agent_context/                          # 【P5 级机器索引】专为 AI Agent 设计的高密度上下文地图
     ├── codebase_path_mapping.md               # 核心领域实体与代码物理路径精准映射表
@@ -106,7 +95,7 @@ flowchart TD
 ```
 
 ### 🚨 Step 1：【进场首读】必须且强制首读 `00_standards/`
-- **吸收术语基准**：严格核对 `entity_dictionary.md`，使用标准英文标识（如统一使用 `company_id`，严禁混用已废弃的 `tenant_id`、`corp_id`）；
+- **吸收术语基准**：严格核对 `entity_dictionary.md`，使用标准英文标识（如统一使用 `company_id`，严禁混用已废弃的历史别名）；
 - **吸收枚举规范**：核对底层 `tinyint` 与外部 `string` 的双向转换标准，严禁在代码中写死魔法数字或魔法字符串；
 - **建立红线戒备**：
   - **严禁上帝文件 (No God File)**：单文件控制在 200~300 行内，超过 500 行必须审视拆分；
@@ -127,7 +116,84 @@ flowchart TD
 
 ---
 
-# 4. 人机双重视角文档体系设计 (Dual-Audience Design)
+# 4. 高价值 BUG 案例与深度避坑档案治理规范 (High-Value Bug Cases & Gotchas Archive)
+
+在大型项目中，踩坑经验是系统抵御风险的“免疫抗体”。文档库必须建立**高价值 BUG 案例档案（Post-Mortems）**，让团队与 AI Agent 绝不在同一个坑里跌倒两次。
+
+### 4.1 案例入库价值门槛 (Value Threshold - 严格甄选)
+绝不允许把鸡毛蒜皮的琐碎报错当成案例记录。**必须具备深层技术机理与高防坑价值**：
+
+- ❌ **坚决不记**：低级语法错误、单词拼写错、少导包、缺少环境依赖等一目了然的问题；
+- ✅ **必须入库的高价值案例**：
+  1. **高并发与分布式竞态**：Goroutine 竞态破坏内存、分布式锁粒度失当引发死锁、非幂等重试导致资金/库存重扣；
+  2. **隐蔽资源与生命周期泄漏**：SQL/HTTP 连接未释放耗尽连接池、Context 乱传导致协程永久泄漏、大对象未流式处理导致 OOM；
+  3. **底层框架与三方协议黑盒陷阱**：ORM 隐式默认值覆盖、JSON 反序列化精度丢失 (64-bit int 溢出)、第三方 API 乱序回调；
+  4. **状态机隐蔽非法跃迁**：复杂业务逆向流遗漏、超时 Worker 扫描并发覆盖已完成状态。
+
+### 4.2 标准案例复盘模板 (`docs/04_operations/post_mortems/case_YYYYMMDD_<topic>.md`)
+
+所有高价值 Bug 案例必须按以下工业级标准编写：
+
+```markdown
+# 🩺 经典故障复盘与避坑档案：[简明主题，如：高并发下订单状态分布式竞态与脏读覆盖]
+
+## 1. 案例基本信息
+- **发生时间**：2026-XX-XX
+- **影响范围**：[如：支付回调与用户主动取消并发时，极小概率导致订单状态卡死在中间态]
+- **严重定级**：P1 (核心交易资损隐患) / P2 (核心链路异常)
+- **对应提交 Commit**：`fix(order): 采用 Redis Lua 分布式原子锁化解状态跃迁竞态`
+
+## 2. 故障现象与隐蔽触发路径 (Symptom & Hidden Path)
+- **现象描述**：[精准描述线上出现的诡异报错或数据异常]
+- **触发路径**：
+  ```text
+  第三方支付异步回调 (goroutine A) ───┐
+                                     ├──> 几乎同时触发 UpdateOrderStatus() ──> 发生并发脏写覆盖
+  用户端在超时前一秒点击取消 (goroutine B) ┘
+  ```
+- **为什么极难发现**：本地单并发测试 100% 正常，只有在网络延迟抖动且并发达到峰值时才会偶发触发。
+
+## 3. 根本原因机理剖析 (Root Cause Analysis)
+- **直接诱因**：数据库更新语句使用了绝对值赋值 `status = 2`，而非基于状态机当前版本的条件 CAS 更新（`WHERE id = ? AND status = 1`）；
+- **深层架构根因**：缺乏跨服务分布式悲观防重锁，业务编排层在读取订单后到写入之间存在 80ms 的外部 RPC 耗时窗口，造成典型的“Time-of-check to time-of-use (TOCTOU)”竞态漏洞。
+
+## 4. ❌ 错误反例代码 vs ✅ 稳健解法对比 (Code Diff)
+
+### ❌ 危险脆弱写法 (引发故障的代码)
+```go
+// 错误：读取与更新非原子，中间有外部耗时操作，极易并发脏写
+order, _ := l.svcCtx.OrderModel.FindOne(l.ctx, req.OrderId)
+res, _ := l.svcCtx.PaymentRpc.Verify(l.ctx, req.PayId)
+order.Status = enums.OrderStatusPaid
+_ = l.svcCtx.OrderModel.Update(l.ctx, order)
+```
+
+### ✅ 优雅免疫写法 (修复后的代码)
+```go
+// 正确：引入 Redis Lua 分布式原子锁 + 数据库乐观锁版本断言
+lockKey := fmt.Sprintf("lock:order:%d", req.OrderId)
+acquire, err := l.svcCtx.Redis.SetnxEx(l.ctx, lockKey, "1", 5) // 5s 租期锁
+if !acquire {
+    return errorx.NewBizError(errorx.ErrCodeConflict, "订单正在处理中，请勿重复操作")
+}
+defer l.svcCtx.Redis.Del(context.Background(), lockKey)
+
+// 数据库端基于当前状态严格进行条件状态跃迁 (FSM Guard)
+affected, err := l.svcCtx.OrderModel.TransitStatus(l.ctx, req.OrderId, enums.OrderStatusPaying, enums.OrderStatusPaid)
+```
+
+## 5. 🛡️ 永久免疫防线 (Immunity Guardrails)
+为彻底防止后续重构或新同学再次踩坑，已建立以下硬性防护：
+1. **自动化单测防线**：在 `internal/logic/order_logic_test.go` 中编写了并发度为 50 的 Goroutine 并发竞态压测用例 (`TestOrder_ConcurrentStatusTransition_Race`)，纳入 CI 门禁；
+2. **架构红线收录**：写入 `docs/00_standards/architectural_guardrails.md`，明令禁止在状态机跃迁中省略条件校验。
+
+## 6. 💡 给后续开发与 AI 结对助手的警示箴言 (Key Takeaway)
+> 凡涉及多事件源并发变更同一实体状态时，严禁使用“先查后改”逻辑！必须强制使用分布式锁或 SQL 级原子条件跃迁。
+```
+
+---
+
+# 5. 人机双重视角文档体系设计 (Dual-Audience Design)
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -142,28 +208,22 @@ flowchart TD
 └───────────────────────────────────┴────────────────────────────────────┘
 ```
 
-## 4.1 面向人类工程师的文档要点 (Human-Facing)
+## 5.1 面向人类工程师的文档要点 (Human-Facing)
 - **业务价值优先**：说明“为什么做这个功能”、“解决了什么业务痛点”；
 - **图形化与可视化**：使用规范的 Mermaid 流程图、时序图直观展示系统交互；
 - **排障与操作指引**：清晰列出配置参数、环境变量说明、常见问题（FAQ）排查步骤。
 
-## 4.2 面向 AI Agent 的上下文锚点要点 (Agent-Facing Context)
+## 5.2 面向 AI Agent 的上下文锚点要点 (Agent-Facing Context)
 1. **领域术语与实体映射表 (Domain Terms & Entity Mapping)**：
    - 明确全系统核心概念的标准英文命名、对应主键 ID 命名、以及禁止混用的别名。
 2. **代码路径精准映射表 (Code Path Mapping)**：
-   - 直接标明关键组件所在的代码文件绝对/相对路径：
-     ```markdown
-     - 业务规则编排 (Logic): app/order/internal/logic/
-     - 数据持久层 (Model): pkg/model/order_model.go
-     - 领域枚举定义: pkg/enums/order_status.go
-     - 统一上下文提取: pkg/ctxdata/
-     ```
+   - 直接标明关键组件所在的代码文件绝对/相对路径。
 3. **架构决策记录 (ADR & Gotchas - 为什么不这么做)**：
-   - 记录既往填坑结论（例如：“为什么不使用全局单例 DB”、“为什么长 ID 必须加 `,string`”、“为什么某个表不能直接查必须走 Redis”），防止下一个 Agent 好心办坏事误推翻现有设计。
+   - 记录既往填坑结论，防止下一个 Agent 好心办坏事误推翻现有设计。
 
 ---
 
-# 5. 文档严谨性与增量维护准则 (Incremental Maintenance)
+# 6. 文档严谨性与增量维护准则 (Incremental Maintenance)
 
 1. **核心逻辑完整严谨**：记录业务方案时必须把核心分支逻辑写详尽，公式算法、限制条款、边界约束、错误码必须完整记录。
 2. **严禁盲目覆写 (No Blind Overwrite)**：
@@ -176,7 +236,7 @@ flowchart TD
 
 ---
 
-# 6. Mermaid 图表渲染防坑 4 大铁律 (Zero-Crash Diagramming)
+# 7. Mermaid 图表渲染防坑 4 大铁律 (Zero-Crash Diagramming)
 
 > 🚨 **核心红线（全系统适用）**：
 > 各种 Markdown 预览器（GitHub、VSCode、Notion、Obsidian、Typora 等）的 Mermaid AST 解析器对语法异常极其敏感。编写任何 Mermaid 图表时，**必须 100% 遵守以下 4 大绝对红线**，彻底根除语法崩溃！
@@ -203,9 +263,9 @@ flowchart TD
 
 ---
 
-# 7. 标准 Mermaid 范式示例 (Safe Templates)
+# 8. 标准 Mermaid 范式示例 (Safe Templates)
 
-### 7.1 安全架构流程图范式 (Safe Flowchart)
+### 8.1 安全架构流程图范式 (Safe Flowchart)
 ```mermaid
 flowchart TD
     Client["终端客户端 (Web/App)"] -->|"发起业务请求"| Gateway["API 网关服务"]
@@ -218,7 +278,7 @@ flowchart TD
     Decision -->|"否"| ReturnNotFound["返回 404 业务错误"]
 ```
 
-### 7.2 安全时序图范式 (Safe Sequence Diagram)
+### 8.2 安全时序图范式 (Safe Sequence Diagram)
 ```mermaid
 sequenceDiagram
     autonumber
@@ -241,11 +301,11 @@ sequenceDiagram
 
 ---
 
-# 8. 文档与 Mermaid 渲染报错排查 (Troubleshooting & Syntax Linting)
+# 9. 文档与 Mermaid 渲染报错排查 (Troubleshooting & Syntax Linting)
 
 当 Markdown 预览器或 GitHub 渲染架构图失败出现红色 `Syntax error in graph` 时，按照以下四项铁律快速定位：
 
-### 8.1 Mermaid 语法崩溃四大快速排查清单
+### 9.1 Mermaid 语法崩溃四大快速排查清单
 1. **检查菱形节点内是否存在花括号 `{}`**：
    - 错误：`node{"是否满足条件 {tenant_id}?"}`
    - 修复：去除花括号，改为 `node{"是否满足条件 <tenant_id>?"}` 或纯文本。
