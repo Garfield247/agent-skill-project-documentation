@@ -207,3 +207,20 @@ sequenceDiagram
 4. **检查箭头是否错误连向了 `subgraph`**：
    - 错误：`nodeA --> subgraph_cluster`
    - 修复：箭头终点必须是子图内部的具体节点 ID，严禁直接指向子图名称。
+
+---
+
+# 7. 人机双视角文档进阶：AI 上下文地图与防腐同步律 (AI Context Map & Doc Drift)
+
+### 7.1 面向 AI Agent 的紧凑上下文地图 (Context Map Table)
+在项目根目录文档（如 `PROJECT_CONTEXT.md` 或 `doc_architecture.md`）中，维护一份面向 AI 的紧凑路由表，避免 Agent 盲目全量扫盘引发 Token 爆炸：
+
+| 业务子系统 / 模块 | 核心物理路径 | 核心入口类 / 文件 | 依赖持有中心 | 敏感文件 / 禁区 |
+| :--- | :--- | :--- | :--- | :--- |
+| **用户认证中心** | `internal/auth/` | `auth_logic.go` | `svc.ServiceContext` | 禁直接读写明文密码 |
+| **设备监控接入** | `internal/device/` | `handler/stream.go` | Redis 实时管道 | 需长连接防断 |
+
+### 7.2 文档防腐同步律 (Doc Drift Prevention - 核心铁律)
+- **同生命周期绑定**：
+  当对核心数据表字段、有限状态机（FSM）或统一接口进行重构时，**必须在同一个 Commit 中同步修改对应的 `doc_*.md` 文档**；
+- 严禁“先上线代码，下周再补文档”的技术债延期行为，保证文档即事实代码的实时镜像。
