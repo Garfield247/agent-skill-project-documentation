@@ -315,3 +315,46 @@ sequenceDiagram
     end
     S-->>C: 统一返回标准响应 {"code": 0, "msg": "ok"}
 ```
+
+---
+
+# 9. 项目轻量元指针地图规范 (Agent Pointer Map & SSOT Architecture)
+
+为彻底解决长会话上下文膨胀、认知漂移与正文混杂问题，本规范确立 **“单一数据源 (SSOT) 与轻量指针引用”** 的知识治理架构。
+
+### 9.1 单一数据源与人机解耦红线
+- 🚨 **严禁正文冗余拷贝**：严禁在 Agent 目录或配置中重复编写项目业务文档的正文。业务正文永远归属于项目原生的 `docs/` 目录；
+- 🚨 **人机视角物理隔离**：项目的 `docs/` 保持对人类工程师的高度可读与纯粹；Agent 的跨会话上下文导航统一收拢在项目根目录的 **`.agents/PROJECT_MAP.md`**。
+
+### 9.2 `.agents/PROJECT_MAP.md` 标准模板
+每个大型或多模块项目根目录的 `.agents/PROJECT_MAP.md` 仅充当**逻辑指针与行号索引**，总体规模严格控制在 100 行以内：
+
+```markdown
+# 🧭 项目架构与领域知识元指针地图 (Agent Index Map)
+
+> 🚨 本文件仅充当逻辑指针，严禁冗余拷贝正文。需要某块知识时，按指定行号精准切片读取原文档。
+
+## 1. 核心流量入口与领域状态机 (Domain State Machines)
+- **订单流转与有限状态机**: 
+  👉 [order_state_machine.md](file:///path/to/docs/business/order_state_machine.md#L45-L120) (核心关注：状态扭转校验表与非法扭转拦截)
+- **API 统一契约与全局错误码**: 
+  👉 [api_spec.md](file:///path/to/docs/api/user.md#L10-L60) (核心关注：BaseResponse 与业务 Code 映射)
+
+## 2. 基础设施与存储持久化 (Infrastructure & Storage)
+- **MySQL 核心表索引与分表规划**: 
+  👉 [database_schema.md](file:///path/to/docs/db/schema.md#L80-L150) (核心关注：覆盖索引设计与最左前缀)
+- **Redis 键命名空间与分布式锁前缀**: 
+  👉 遵循全局 `redis-mastery`，项目实参配置参见 [cache_spec.md](file:///path/to/docs/infra/cache.md#L20-L55)
+
+## 3. 历史高危避坑与复盘索引 (Post-Mortem Pointers)
+- **2026-09 分布式锁死锁与环境串味事故**: 
+  👉 [2026-09-lock.md](file:///path/to/docs/post-mortems/2026-09-lock.md) (排查同类死锁问题前必读)
+- **2026-08 消费端 QoS 缺失雪崩事故**: 
+  👉 [2026-08-rabbitmq-qos.md](file:///path/to/docs/post-mortems/2026-08-rabbitmq-qos.md)
+```
+
+### 9.3 渐进式行号切片装载纪律 (Slice Loading via Line Ranges)
+1. **先查地图，按需切片**：Agent 遇到具体业务或排障任务时，严禁盲目读取整个 `docs/` 大文件，必须先在 `PROJECT_MAP.md` 中定位章节行号；
+2. **工具切片调阅**：明确调用 `view_file(AbsolutePath, StartLine, EndLine)` 仅装载相关 30~80 行内容，以最小 Token 消耗获取最高密度上下文；
+3. **闭环反哺更新**：当产生新的重大决策 (MADR) 或事故复盘 (Post-Mortem) 时，在项目 `docs/` 写入新文档后，仅需在 `.agents/PROJECT_MAP.md` 中追加一行轻量指针链接。
+
