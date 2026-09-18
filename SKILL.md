@@ -187,3 +187,23 @@ sequenceDiagram
     end
     S-->>C: 统一返回标准响应 {"code": 0, "msg": "ok"}
 ```
+
+---
+
+# 6. 文档与 Mermaid 渲染报错排查 (Troubleshooting & Syntax Linting)
+
+当 Markdown 预览器或 GitHub 渲染架构图失败出现红色 `Syntax error in graph` 时，按照以下四项铁律快速定位：
+
+### 6.1 Mermaid 语法崩溃四大快速排查清单
+1. **检查菱形节点内是否存在花括号 `{}`**：
+   - 错误：`node{"是否满足条件 {tenant_id}?"}`
+   - 修复：去除花括号，改为 `node{"是否满足条件 <tenant_id>?"}` 或纯文本。
+2. **检查连线管道符 `|...|` 是否含有非法符号**：
+   - 错误：`A -->|存在超期(如 sess_101)| B`
+   - 修复：管道符内严禁包含中英文圆括号 `()`、逗号 `,`，改为 `A -->|存在超期会话| B`。
+3. **检查节点标签是否缺少显式双引号包裹**：
+   - 错误：`db[MySQL: users(id, name)]`
+   - 修复：必须包裹双引号，防止 SQL 括号干扰语法解析器：`db["MySQL: users(id, name)"]`。
+4. **检查箭头是否错误连向了 `subgraph`**：
+   - 错误：`nodeA --> subgraph_cluster`
+   - 修复：箭头终点必须是子图内部的具体节点 ID，严禁直接指向子图名称。
