@@ -55,7 +55,7 @@ cp SKILL.md .agents/skills/project-documentation/SKILL.md
 
 ### 2. 通过 Agent Skills 包管理器安装
 ```bash
-npx skills add Garfield247/project-documentation
+npx skills add Garfield247/agent-skill-project-documentation
 ```
 
 ---
