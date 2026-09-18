@@ -1,9 +1,10 @@
 ---
 name: project-documentation
 description: >-
-  人机双重视角项目技术文档体系、分类目录治理、Agent 上下文地图与 Mermaid 图表防崩渲染生产级规范技能。
-  支持工程文档目录自适应智能探测 (不硬编码目录名)、人类与 AI Agent 双重视角文档分层设计、
-  分类分层子目录结构、代码路径映射、增量维护准则及 Mermaid 图表渲染 4 大绝对红线。
+  人机双重视角项目技术文档体系、分类分层目录治理、00 号标准约束与红线第一法则、
+  AI 进场首读规范、Agent 上下文地图与 Mermaid 图表防崩渲染生产级规范技能。
+  支持工程文档目录自适应智能探测 (不硬编码目录名)、数字优先级分层目录结构、
+  术语与枚举字典、单一职责与上帝文件拆分红线及 Mermaid 4 大防崩语法铁律。
 ---
 
 # 项目技术文档治理与 Mermaid 渲染规范技能 (Project Documentation Skill)
@@ -12,15 +13,23 @@ description: >-
 
 本技能定义了研发工程师与 AI 编码助手在为软件工程编写、维护技术文档与架构图表时的通用工业级标准。
 
-核心突破在于：**摆脱传统文档仅面向人类的单一视角，构建“人类工程师 (Human-Facing) + AI Agent (Agent-Facing)”双重视角的文档与知识库体系**；同时提供自适应文档目录探测机制与彻底杜绝预览器 AST 解析崩溃的 Mermaid 4 大渲染铁律。
+核心突破在于：**摆脱传统文档仅面向人类的单一视角，构建“人类工程师 (Human-Facing) + AI Agent (Agent-Facing)”双重视角的文档与知识库体系**。同时确立**“标准约束与工程红线第一法则 (Standards & Redlines First Principle)”**，让 AI 结对伙伴在接手项目时首先建立严密的规则防线与边界共识，彻底杜绝凭感觉编码、制造上帝文件与违反架构红线。
 
 ### 核心设计原则
 
-1. **目录非硬编码自适应探测 (Folder-Agnostic Discovery)**：不强制绑定特定目录名，智能探测识别项目既有文档目录，尊重不同团队与个人的存放习惯。
-2. **人机双重视角架构 (Dual-Audience Architecture)**：既提供人类可读的业务全景与架构设计，又专门为后续进场的 AI 编码助手建立高密度的上下文锚点（Context Anchors）。
-3. **分类分层子目录治理 (Categorized Hierarchy)**：严禁数十篇文档无序平铺在根目录下，必须按职责分门别类归入子目录。
-4. **增量维护与完整性原则 (Incremental & Non-Destructive)**：严禁未经确认直接清空或盲目覆写已有重要章节，必须保持文档与最新代码逻辑严密同步。
-5. **Mermaid 渲染防坑 4 大铁律 (Zero-Crash Diagramming)**：严格遵循规避各类 Markdown 解析器词法崩溃的语法安全边界。
+1. **标准约束与工程红线第一法则 (Standards & Redlines First Principle - P0 必读基石)**：
+   - 项目的“术语映射、核心枚举、分层职责、单文件行数与上帝文件拆分红线、架构反模式禁令”是全工程的宪章总纲；
+   - **AI Agent 在操作项目时，必须首先查阅此规范，建立绝对边界认知后，方可阅读需求与实现代码**。
+2. **数字优先级分层子目录治理 (Numbered Hierarchy)**：
+   - 采用业界大型工程标杆的编号分层结构（`00_standards/` -> `01_requirements/` -> `02_architecture/` -> `03_api/` -> `04_operations/` -> `05_agent_context/`），层级清晰，权重分明。
+3. **目录非硬编码自适应探测 (Folder-Agnostic Discovery)**：
+   - 智能探测识别项目既有文档目录（`docs/`、`wiki/`、`documentation/`），尊重项目存量风格，严禁擅自新建别名目录。
+4. **人机双重视角架构 (Dual-Audience Architecture)**：
+   - 既提供人类可读的业务全景与物理拓扑，又专门为 AI 编码助手建立高密度的物理路径映射与上下文锚点。
+5. **增量维护与完整性原则 (Incremental & Non-Destructive)**：
+   - 严禁未经确认直接清空或盲目覆写已有重要章节，代码与文档同生命周期绑定更新。
+6. **Mermaid 渲染防坑 4 大铁律 (Zero-Crash Diagramming)**：
+   - 严格遵循规避各类 Markdown 解析器词法崩溃的语法安全边界。
 
 ---
 
@@ -42,9 +51,83 @@ description: >-
 
 ---
 
-# 2. 人机双重视角文档体系设计 (Dual-Audience Design)
+# 2. 数字优先级分层子目录治理结构 (Numbered Hierarchy)
 
-一份卓越的工程文档必须同时服务于**人类工程师**与**AI Agent 结对伙伴**两种读者：
+严禁把全工程所有设计说明书、接口文档、部署配置全部平铺混杂。大型生产级工程推荐采用以下**显式编号优先级分层目录**：
+
+```text
+docs/ (或项目自适应命中的既有文档目录)
+│
+├── README.md                                  # 文档索引总导航与架构全景简介
+│
+├── 00_standards/                              # 🚨【P0 级必读基石】标准术语与全局工程开发规范总纲
+│   ├── 00_global_standards_and_redlines.md    # 核心总纲：实体术语字典、枚举规范、单一职责、文件拆分与代码红线
+│   ├── entity_dictionary.md                   # 核心业务实体标准命名、字段名、废弃禁用词对照字典
+│   ├── enums_reference.md                     # 全局领域枚举对照字典 (底层 tinyint vs 外部 string 双向转换)
+│   ├── coding_redlines.md                     # 工程红线清单 (禁止上帝文件、单文件行数软硬阈值、防重锁粒度)
+│   └── architectural_guardrails.md            # 架构反模式禁令 (严禁静默重试/兜底、严禁跨层穿透、严禁无状态破坏)
+│
+├── 01_requirements/                           # 【P1 级需求全景】业务场景与产品背景
+│   ├── product_overview.md                    # 业务全景、产品核心价值与用户画像
+│   └── feature_matrix.md                      # 核心功能矩阵、业务边界与里程碑版本规划
+│
+├── 02_architecture/                           # 【P2 级架构设计】系统拓扑、领域建模与状态机
+│   ├── system_topology.md                     # 物理部署、微服务交互拓扑与网络边界
+│   ├── domain_models.md                       # 领域实体关系图 (ER)、数据库表结构与分表规划
+│   ├── workflow_and_fsm.md                    # 核心业务交互时序图 (Mermaid) 与有限状态机 (FSM) 跃迁图
+│   └── adr_decisions.md                       # 架构决策记录 (ADR) 与既往填坑结论 (Why & Gotchas)
+│
+├── 03_api/                                    # 【P3 级协议契约】接口契约与通信协议
+│   ├── http_contracts.md                      # RESTful API 契约、路由分组、统一响应格式与业务错误码
+│   ├── rpc_protocols.md                       # gRPC / Protobuf 微服务内部通信契约
+│   └── event_streams.md                       # 消息队列 (Kafka/RabbitMQ) 事件 Schema 与 WebSocket 协议
+│
+├── 04_operations/                             # 【P4 级实操指南】研发实战、配置与运维排障
+│   ├── local_development.md                   # 本地环境搭建、依赖中间件拉起与启动步骤
+│   ├── configuration_dictionary.md            # 配置文件参数字典与环境变量映射表
+│   └── troubleshooting_faq.md                 # 常见线上故障定位 SOP、核心排障命令与日志排查速查
+│
+└── 05_agent_context/                          # 【P5 级机器索引】专为 AI Agent 设计的高密度上下文地图
+    ├── codebase_path_mapping.md               # 核心领域实体与代码物理路径精准映射表
+    └── context_entrypoint.md                  # AI 进场启动指针 (优先引导阅读 00_standards/)
+```
+
+---
+
+# 3. AI Agent 进场作业四步法 (Standards-First SOP)
+
+为了让后续进场的 AI 编码助手在接手任务时**不“失忆”、不盲目造轮子、不臆造不存在的代码、不违反项目红线**，AI 必须严格执行以下四步作业协议：
+
+```mermaid
+flowchart TD
+    A["Step 1: 进场首读 00_standards/<br/>(吸收术语字典、枚举规范与工程红线)"] --> B["Step 2: 查阅 05_agent_context/<br/>(精准定位代码物理路径，防盲目造轮子)"]
+    B --> C["Step 3: 审阅 01_requirements/ 与 02_architecture/<br/>(理解业务场景、时序交互与状态机边界)"]
+    C --> D["Step 4: 执行方案设计与代码实现<br/>(遵循最小破坏性修复与铁证验证门禁)"]
+```
+
+### 🚨 Step 1：【进场首读】必须且强制首读 `00_standards/`
+- **吸收术语基准**：严格核对 `entity_dictionary.md`，使用标准英文标识（如统一使用 `company_id`，严禁混用已废弃的 `tenant_id`、`corp_id`）；
+- **吸收枚举规范**：核对底层 `tinyint` 与外部 `string` 的双向转换标准，严禁在代码中写死魔法数字或魔法字符串；
+- **建立红线戒备**：
+  - **严禁上帝文件 (No God File)**：单文件控制在 200~300 行内，超过 500 行必须审视拆分；
+  - **严禁静默重试与默认兜底**；
+  - **严格分层职责**：Handler 仅做反序列化与响应包装，严禁直接写 SQL 或直接穿透调用 Model。
+
+### 🧭 Step 2：【路径对齐】查阅 `05_agent_context/` 或 `path_mapping`
+- 查阅代码物理路径映射，获知 Logic、Model、Enum、Middleware 的实际存放位置；
+- 避免全量扫盘引发 Token 浪费或产生幻觉路径。
+
+### 🏛️ Step 3：【需求与架构对齐】查阅需求与设计文档
+- 审阅具体需求的业务背景与 In-Scope/Out-of-Scope 边界；
+- 对齐业务时序图与状态机逆向流分支。
+
+### 🛠️ Step 4：【编码与铁证验证】
+- 编写代码时严格落实标准约束与红线；
+- 运行自动化检验命令，提供真实执行铁证。
+
+---
+
+# 4. 人机双重视角文档体系设计 (Dual-Audience Design)
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -59,16 +142,14 @@ description: >-
 └───────────────────────────────────┴────────────────────────────────────┘
 ```
 
-## 2.1 面向人类工程师的文档要点 (Human-Facing)
+## 4.1 面向人类工程师的文档要点 (Human-Facing)
 - **业务价值优先**：说明“为什么做这个功能”、“解决了什么业务痛点”；
 - **图形化与可视化**：使用规范的 Mermaid 流程图、时序图直观展示系统交互；
 - **排障与操作指引**：清晰列出配置参数、环境变量说明、常见问题（FAQ）排查步骤。
 
-## 2.2 面向 AI Agent 的上下文锚点要点 (Agent-Facing Context)
-为了让后续进场的 AI 编码助手在接手任务时**不“失忆”、不盲目造轮子、不臆造不存在的代码**，必须维护高密度的上下文索引：
-
+## 4.2 面向 AI Agent 的上下文锚点要点 (Agent-Facing Context)
 1. **领域术语与实体映射表 (Domain Terms & Entity Mapping)**：
-   - 明确全系统核心概念的标准英文命名、对应主键 ID 命名、以及禁止混用的别名（避免 AI 随性使用 `user_id` / `customer_id` / `account_id` 乱串）。
+   - 明确全系统核心概念的标准英文命名、对应主键 ID 命名、以及禁止混用的别名。
 2. **代码路径精准映射表 (Code Path Mapping)**：
    - 直接标明关键组件所在的代码文件绝对/相对路径：
      ```markdown
@@ -82,50 +163,20 @@ description: >-
 
 ---
 
-# 3. 分类分层子目录治理结构 (Directory Hierarchy)
-
-严禁把全工程所有设计说明书、接口文档、部署配置全部平铺混杂。推荐采用以下标准分类子目录：
-
-```text
-docs/ (或项目既有文档目录)
-│
-├── README.md                      # 文档索引总导航与架构全景简介
-│
-├── architecture/                  # 核心架构与领域设计
-│   ├── system_topology.md         # 物理部署与服务交互拓扑
-│   ├── domain_models.md           # 核心业务领域实体与状态机
-│   └── adr_decisions.md           # 架构决策记录 (ADR & 踩坑历史)
-│
-├── api/                           # 接口与通信契约
-│   ├── http_contracts.md          # REST API 路由、请求响应格式与错误码
-│   ├── rpc_protocols.md           # gRPC / Protobuf 微服务通信契约
-│   └── event_streams.md           # 消息队列事件格式 / WebSocket 协议
-│
-├── guides/                        # 研发与运维实战指引
-│   ├── local_development.md       # 本地环境搭建、依赖中间件与启动步骤
-│   ├── configuration.md           # 配置文件参数字典与环境变量映射
-│   └── troubleshooting.md         # 常见故障定位手段与核心日志检索
-│
-└── agent-context/                 # 专为 AI Agent 设计的高密度上下文地图
-    ├── path_mapping.md            # 核心领域实体与代码物理路径映射
-    ├── term_dictionary.md         # 全系统术语命名与防混淆字典
-    └── coding_redlines.md         # 本项目专属代码审查红线清单
-```
-
----
-
-# 4. 文档严谨性与增量维护准则 (Incremental Maintenance)
+# 5. 文档严谨性与增量维护准则 (Incremental Maintenance)
 
 1. **核心逻辑完整严谨**：记录业务方案时必须把核心分支逻辑写详尽，公式算法、限制条款、边界约束、错误码必须完整记录。
 2. **严禁盲目覆写 (No Blind Overwrite)**：
    - 更新已有文档时，必须先阅读全文理解既有上下文；
    - 采用增量追加或局部精准替换（Replace Chunk）；
    - **绝对禁止未经用户确认直接清空或盲目重写已有重要章节**。
-3. **代码与文档强同步**：每次修改核心业务逻辑或接口契约后，必须同步更新对应的文档，保证文档即真实系统镜像。
+3. **代码与文档同生命周期强绑定 (Doc Drift Prevention)**：
+   - 当对核心数据表字段、有限状态机（FSM）或统一接口进行重构时，**必须在同一个 Commit 中同步修改对应的文档**；
+   - 严禁“先上线代码，下周再补文档”的技术债延期行为，保证文档即真实系统镜像。
 
 ---
 
-# 5. Mermaid 图表渲染防坑 4 大铁律 (Zero-Crash Diagramming)
+# 6. Mermaid 图表渲染防坑 4 大铁律 (Zero-Crash Diagramming)
 
 > 🚨 **核心红线（全系统适用）**：
 > 各种 Markdown 预览器（GitHub、VSCode、Notion、Obsidian、Typora 等）的 Mermaid AST 解析器对语法异常极其敏感。编写任何 Mermaid 图表时，**必须 100% 遵守以下 4 大绝对红线**，彻底根除语法崩溃！
@@ -152,9 +203,9 @@ docs/ (或项目既有文档目录)
 
 ---
 
-# 6. 标准 Mermaid 范式示例 (Safe Templates)
+# 7. 标准 Mermaid 范式示例 (Safe Templates)
 
-### 6.1 安全架构流程图范式 (Safe Flowchart)
+### 7.1 安全架构流程图范式 (Safe Flowchart)
 ```mermaid
 flowchart TD
     Client["终端客户端 (Web/App)"] -->|"发起业务请求"| Gateway["API 网关服务"]
@@ -167,7 +218,7 @@ flowchart TD
     Decision -->|"否"| ReturnNotFound["返回 404 业务错误"]
 ```
 
-### 6.2 安全时序图范式 (Safe Sequence Diagram)
+### 7.2 安全时序图范式 (Safe Sequence Diagram)
 ```mermaid
 sequenceDiagram
     autonumber
@@ -190,11 +241,11 @@ sequenceDiagram
 
 ---
 
-# 6. 文档与 Mermaid 渲染报错排查 (Troubleshooting & Syntax Linting)
+# 8. 文档与 Mermaid 渲染报错排查 (Troubleshooting & Syntax Linting)
 
 当 Markdown 预览器或 GitHub 渲染架构图失败出现红色 `Syntax error in graph` 时，按照以下四项铁律快速定位：
 
-### 6.1 Mermaid 语法崩溃四大快速排查清单
+### 8.1 Mermaid 语法崩溃四大快速排查清单
 1. **检查菱形节点内是否存在花括号 `{}`**：
    - 错误：`node{"是否满足条件 {tenant_id}?"}`
    - 修复：去除花括号，改为 `node{"是否满足条件 <tenant_id>?"}` 或纯文本。
@@ -207,20 +258,3 @@ sequenceDiagram
 4. **检查箭头是否错误连向了 `subgraph`**：
    - 错误：`nodeA --> subgraph_cluster`
    - 修复：箭头终点必须是子图内部的具体节点 ID，严禁直接指向子图名称。
-
----
-
-# 7. 人机双视角文档进阶：AI 上下文地图与防腐同步律 (AI Context Map & Doc Drift)
-
-### 7.1 面向 AI Agent 的紧凑上下文地图 (Context Map Table)
-在项目根目录文档（如 `PROJECT_CONTEXT.md` 或 `doc_architecture.md`）中，维护一份面向 AI 的紧凑路由表，避免 Agent 盲目全量扫盘引发 Token 爆炸：
-
-| 业务子系统 / 模块 | 核心物理路径 | 核心入口类 / 文件 | 依赖持有中心 | 敏感文件 / 禁区 |
-| :--- | :--- | :--- | :--- | :--- |
-| **用户认证中心** | `internal/auth/` | `auth_logic.go` | `svc.ServiceContext` | 禁直接读写明文密码 |
-| **设备监控接入** | `internal/device/` | `handler/stream.go` | Redis 实时管道 | 需长连接防断 |
-
-### 7.2 文档防腐同步律 (Doc Drift Prevention - 核心铁律)
-- **同生命周期绑定**：
-  当对核心数据表字段、有限状态机（FSM）或统一接口进行重构时，**必须在同一个 Commit 中同步修改对应的 `doc_*.md` 文档**；
-- 严禁“先上线代码，下周再补文档”的技术债延期行为，保证文档即事实代码的实时镜像。
