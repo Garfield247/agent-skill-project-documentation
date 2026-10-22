@@ -6,384 +6,48 @@ description: >-
   渐进式披露 (Progressive Disclosure) 与 Mermaid 图表防崩渲染生产级规范技能。
 ---
 
-# 项目技术文档治理与知识工程规范技能 (Project Documentation Skill)
+# 项目技术文档治理与知识工程规范 (Project Documentation Skill)
 
-## 概述 (Overview)
-
-本技能定义了研发工程师与 AI 编码助手在为软件工程编写、维护技术文档、架构决策与图表时的工业级标杆标准。
-
-### 🚨 文档治理与阅读核心铁律 (Core Redlines)
-1. **中文命名规范**：文档相关的目录（Folder）与 Markdown 文件（.md）**一律优先采用中文命名**（结合数字编号自然排序，如 `00_标准与规范/`、`01_需求全景/`、`02_架构设计/`），对人类直观审阅与工程维护高度友好；
-2. **细节保真与无损表达**：文档简洁干练的**绝对前提是清晰且细节绝不丢失**！严禁以“精简”为由省略数据表 DDL 完整字段、请求/响应真实报文、错误码枚举及关键代码片段；
-3. **拒绝对文档少读漏读**：查阅文档与代码上下文时，**坚决禁止为了省 Token 而少读漏读**！查阅必须完整覆盖语义单元，核心设计与小文件应当全文阅读，杜绝断章取义；
-4. **信息熵与保质保量第一**：Token 与上下文优化的**绝对前提是确保信息熵值与技术细节 100% 完整**。“优化”只是锦上添花，一切以**准确、完整、保质保量**为根本红线。
-
-融合全球权威文档标准与 AI Agent 时代前沿工程实践：
-1. **Diátaxis 四象限框架** (Python/Django 官方标准：Tutorials, How-To, Reference, Explanation 正交分类)；
-2. **MADR 架构决策记录标准** (Markdown Architectural Decision Records，决策与否决权衡沉淀)；
-3. **“00 号标准约束与工程红线第一法则”** (全系统唯一基准字典与上帝文件禁止硬红线)；
-4. **“高价值 BUG 案例与深度避坑档案 (Post-Mortems)”** (拒绝鸡毛蒜皮，将深层故障转化为永久免疫资产)；
-5. **渐进式披露协议 (Progressive Disclosure)** (拒绝 Token 爆炸，通过高密度索引指针按需加载)；
-6. **Mermaid 4 大防崩语法铁律** (彻底杜绝各大 Markdown 预览器词法解析崩溃)。
+本技能定义了为软件工程编写维护技术文档、架构时序决策与工程避坑档案时的标准体系、文档与代码同频门禁与渐进式手册索引。
 
 ---
 
-# 1. 智能目录探测与非硬编码规范 (Folder Discovery)
+## 1. 核心铁律与绝对红线 (Core Redlines)
 
-在创建或查阅文档前，必须在**当前操作项目的根目录**（以 `.git`、`go.mod`、`pyproject.toml`、`package.json`、`composer.json` 为根边界）执行自适应探测：
-
-```text
-1. 检查是否存在既有技术文档目录：
-   - docs/
-   - wiki/
-   - documentation/
-   - project_wiki/
-   - doc/
-2. 若命中任意既有目录：一律沿用该既有目录，保持项目历史风格统一，严禁擅自新建别名目录；
-3. 若均不存在：根据行业通用惯例，在当前项目根目录下初始化创建通用的 docs/ 目录；
-4. 绝对红线：严禁在系统根路径 (/Users/garfield/ 等) 或父级无关目录中新建文档！
-```
-
----
-
-# 2. 数字优先级与 Diátaxis 四象限分层治理结构 (Numbered Diátaxis Hierarchy)
-
-严禁把全工程所有设计说明书、接口文档、部署配置全部平铺混杂。大型生产级工程采用以下**显式编号优先级分层目录**，**优先采用中文命名**（带数字编号自然排序），并严格对齐 Diátaxis 文档模式：
-
-```text
-docs/ (或项目自适应命中的既有文档目录，如 project_wiki/)
-│
-├── README.md                                  # 文档索引总导航、系统全景与快速指引
-│
-├── 00_标准与规范/                              # 🚨【P0 级基石·Diátaxis: Reference】标准术语与全局工程规范总纲
-│   ├── 00_全局工程规范与红线总纲.md             # 核心总纲：实体字典、枚举规范、单一职责、上帝文件禁止红线
-│   ├── 核心实体与命名对照字典.md               # 核心业务实体标准命名、字段名、废弃禁用词对照字典
-│   ├── 全局领域枚举对照字典.md                 # 全局领域枚举对照字典 (底层 tinyint vs 外部 string 双向转换)
-│   ├── 基础库分层架构规范.md                   # 🏛️ pkg/common 基础层分层架构标准 (一级收紧、二级按需嵌套、*x 扩展包)
-│   ├── 编码红线与质量门禁.md                   # 工程红线清单 (禁止上帝文件、单文件行数软硬阈值、防重锁粒度)
-│   └── 架构反模式与工程禁令.md                 # 架构反模式禁令 (严禁静默重试/兜底、严禁跨层穿透、严禁无状态破坏)
-│
-├── 01_需求全景/                                # 【P1 级全景·Diátaxis: Explanation】业务场景与产品背景
-│   ├── 产品业务全景与核心价值.md               # 业务全景、产品核心价值与用户画像
-│   └── 核心功能矩阵与版本规划.md               # 核心功能矩阵、业务边界与里程碑版本规划
-│
-├── 02_架构设计/                                # 【P2 级设计·Diátaxis: Explanation】系统拓扑、领域建模与状态机
-│   ├── 系统拓扑与网络边界.md                   # 物理部署、微服务交互拓扑与网络边界
-│   ├── 领域数据建模与数据库设计.md             # 领域实体关系图 (ER)、数据库表结构 (完整DDL) 与分表规划
-│   ├── 核心业务时序与有限状态机.md             # 核心业务交互时序图 (Mermaid) 与有限状态机 (FSM) 跃迁图
-│   └── 架构决策记录_ADR/                       # 🏛️【MADR 标准架构决策记录 (只增不删)】
-│       ├── README.md                          # ADR 决策总览索引
-│       └── adr_0001_<决策主题>.md              # 结构化架构决策记录 (上下文、决策、否决项、权衡)
-│
-├── 03_接口契约/                                # 【P3 级契约·Diátaxis: Reference】接口契约与通信协议
-│   ├── HTTP接口契约与错误码.md                 # RESTful API 契约、路由分组、统一响应格式与业务错误码
-│   ├── RPC服务内部通信协议.md                  # gRPC / Protobuf 微服务内部通信契约
-│   └── 消息队列与事件流协议.md                 # 消息队列 (Kafka/RabbitMQ) 事件 Schema 与 WebSocket 协议
-│
-├── 04_运维与实战/                              # 【P4 级实操·Diátaxis: How-To】研发实战、配置与高价值故障档案
-│   ├── 本地开发与环境搭建指引.md               # 本地环境搭建、依赖中间件拉起与启动步骤
-│   ├── 配置参数与环境变量字典.md               # 配置文件参数字典与环境变量映射表
-│   ├── 常见排错与故障诊断手册.md               # 常见日常排错速查与诊断命令
-│   └── 深度避坑档案_复盘案例/                  # 🩺【核心资产·高价值 BUG 案例与深度避坑档案】
-│       ├── README.md                          # 经典案例目录索引与避坑知识图谱
-│       └── 案例_YYYYMMDD_<复盘主题>.md        # 经典案例深度复盘 (机理剖析、反例对比、永久免疫防线)
-│
-└── 05_AI上下文地图/                            # 【P5 级机器索引·渐进式披露中枢】专为 AI Agent 设计的高密度上下文地图
-    ├── 代码物理路径映射索引.md                 # 核心领域实体与代码物理路径精准映射表
-    └── AI进场作业引导指南.md                   # AI 进场启动指针 (引导执行 Progressive Disclosure 协议)
-```
+1. 🚨 **人机三态正交文档治理门禁**：
+   - 第一态（AI 规则态：`.agents/rules/`，必须 Git 追踪）；
+   - 第二态（人类 SSOT 真理库：`project_wiki/` 或 `docs/`，必须 Git 追踪）；
+   - 第三态（瞬态/过程报告态：`.scratch/`，**坚决禁止 Git 追踪**，在 `.gitignore` 排除）。
+2. 🚨 **架构与业务逻辑零脱节铁律 (Architecture-Logic Zero-Drift Gate)**：
+   - 凡改动涉及调用时序、FSM 状态机、系统拓扑或 API 契约，**必须在同一次 Git 提交中同频修改架构文档**；
+   - 严禁“先上线代码、下周补文档”，做到“代码即架构，架构即真相”。
+3. 🚨 **中文命名与细节绝不丢失**：
+   - 人类文档目录与 Markdown 文件**优先采用中文显式编号命名**（如 `02_架构设计/`）；
+   - 严禁以“精简”为由阉割数据表 DDL 约束、枚举字典与错误码，确保细节 100% 保真。
+4. 🚨 **Mermaid 语法防崩四大禁令**：
+   - 严禁菱形节点嵌套花括号 `{...}`；连线条件 `|...|` 必须为纯文本（禁括号/逗号）；
+   - 节点 Label 必须显式双引号包裹；连线必须精确连接到节点 ID，禁连向 subgraph 容器。
 
 ---
 
-# 3. AI Agent 进场作业四步法 (Standards-First & Progressive Disclosure)
+## 2. 标准开发工作流 (Standard Workflow)
 
-吸纳 Anthropic 与 Agent Skills 的**“渐进式披露 (Progressive Disclosure)”**原则，严禁一股脑全量扫盘引发注意力稀释，**同时坚决杜绝为了省 Token 而少读漏读关键细节**。AI 必须严格执行以下四步协议：
-
-```mermaid
-flowchart TD
-    A["Step 1: 进场首读 00_标准与规范/<br/>(吸收术语字典、枚举规范与工程红线)"] --> B["Step 2: 查阅 05_AI上下文地图/<br/>(通过指针定位代码物理路径，按需加载具体子文档)"]
-    B --> C["Step 3: 审阅 01_需求全景/ 与 02_架构设计/<br/>(对齐业务场景、时序交互与状态机边界)"]
-    C --> D["Step 4: 规范编码、铁证验证与文档同步<br/>(遵循最小破坏性原则，同 Commit 提交文档更新)"]
-```
-
-### 🚨 Step 1：【进场首读】必须且强制首读 `00_标准与规范/`
-- **吸收术语基准**：严格核对核心实体字典，使用标准英文标识（如统一使用 `company_id`，严禁混用已废弃的历史别名）；
-- **吸收枚举规范**：核对底层 `tinyint` 与外部 `string` 的双向转换标准，严禁在代码中写死魔法数字或魔法字符串；
-- **建立红线戒备**：
-  - **严禁上帝文件 (No God File)**：单文件控制在 200~300 行内，超过 500 行必须审视拆分；
-  - **严禁静默重试与默认兜底**；
-  - **严格分层职责**：Handler 仅做反序列化与响应包装，严禁直接写 SQL 或直接穿透调用 Model；
-  - **绝不少读漏读**：涉及核心架构、数据字典与基础规范时，必须完整阅读语义块，严禁偷工减料。
-
-### 🧭 Step 2：【按需路由】查阅 `05_AI上下文地图/` 指针
-- 查阅代码物理路径映射索引，锁定 Logic、Model、Enum、Middleware 的物理文件位置；
-- 仅按需加载当前任务涉及的特定接口契约或架构子文档，保持上下文窗口清爽且关键信息熵不衰减。
-
-### 🏛️ Step 3：【需求与架构对齐】查阅需求与设计文档
-- 审阅具体需求的业务背景与 In-Scope/Out-of-Scope 边界；
-- 对齐业务时序图与状态机逆向流分支，查阅相关 ADR 了解历史决策约束；
-- **细节绝不丢失**：核对接口报文与 DDL 字段类型约束，确保技术细节 100% 对齐。
-
-### 🛠️ Step 4：【编码、铁证验证与文档同步】
-- 编写代码时严格落实标准约束与红线；
-- 运行自动化检验命令，提供真实执行铁证；
-- 遵循 Docs-as-Code，若改动了接口或数据模型，在同一次 Commit 中同步修改文档（文档目录及 .md 文件命名优先采用中文）。
+1. **前置摸骨**：首读 `00_标准与规范/` 实体与枚举字典，查阅 `02_架构设计/` 时序流与状态机；
+2. **按需路由**：顺着 `<project>/.agents/rules/`（如 `00_project_map.md`）语义锚点指针精准切片查阅，自愈行号偏移；
+3. **安全编码**：遵从规范编码并运行自动化测试取得铁证；
+4. **同频修改**：同步更新 `project_wiki/` 对应架构图、契约报文与 DDL 字段；
+5. **原子提交**：将业务代码与架构文档精准暂存（`git add <code_file> <doc_file>`）并提交闭环。
 
 ---
 
-# 4. MADR 标准架构决策记录规范 (`docs/02_architecture/adr_decisions/`)
+## 3. 渐进式专业参考手册 (Progressive Disclosure References)
 
-吸纳开源著名的 **MADR (Markdown Architectural Decision Records)** 极简标准，记录重大技术选型与架构折中。所有 ADR 文档遵循以下结构：
+根据具体涉及的业务场景，**按需查阅 `references/` 目录下的专门规约**，严禁将全量子文档一次性无脑全部展开：
 
-```markdown
-# ADR-0001: [标题：决策的核心主题，如：状态机跃迁使用 Redis Lua 分布式锁替代乐观锁]
-
-## 1. 状态 (Status)
-- **状态**：提议中 (Proposed) / 已采纳 (Accepted) / 已废弃 (Deprecated) / 已被替代 (Superseded by ADR-0005)
-- **决定日期**：2026-XX-XX
-- **决策制定人**：[架构师 / 核心开发人员]
-
-## 2. 背景上下文与面临挑战 (Context and Problem Statement)
-- 面临什么高并发、数据一致性或性能瓶颈？
-- 现有方案在什么量级下无法支撑？
-
-## 3. 考虑过的备选方案 (Considered Options)
-1. **方案 A (最终采纳)**：[简要说明]
-2. **方案 B (已否决)**：[简要说明]
-3. **方案 C (已否决)**：[简要说明]
-
-## 4. 决策结果与理由 (Decision Outcome)
-- **最终选定**：方案 A
-- **采纳理由**：
-  - [理由 1：写入时延降低至 2ms]
-  - [理由 2：完美化解 TOCTOU 竞态]
-- **否决理由 (Why Rejected)**：
-  - *方案 B 否决原因*：在 5000 QPS 下数据库重试冲突率高达 35%，导致主库 CPU 爆满。
-
-## 5. 优势与代价折中 (Pros and Cons of the Options)
-### 带来优势 (Good Consequences)
-- 彻底消除了并发脏读与状态回跳。
-### 产生代价与防范措施 (Bad Consequences & Mitigations)
-- 增加了对 Redis 实例高可用 (Sentinel/Cluster) 的依赖；必须实现自动降级告警。
-```
-
----
-
-# 5. 高价值 BUG 案例与深度避坑档案治理规范 (`docs/04_operations/post_mortems/`)
-
-踩坑经验是系统抵御风险的“免疫抗体”。必须建立高价值 BUG 案例档案，绝不允许在同一个坑里跌倒两次。
-
-### 5.1 案例入库价值门槛 (Value Threshold - 严格甄选)
-- ❌ **坚决不记**：低级语法错误、单词拼写错、少导包、缺少环境依赖等一目了然的问题；
-- ✅ **必须入库的高价值案例**：
-  1. **高并发与分布式竞态**：Goroutine 竞态破坏内存、分布式锁粒度失当引发死锁、非幂等重试导致资金/库存重扣；
-  2. **隐蔽资源与生命周期泄漏**：SQL/HTTP 连接未释放耗尽连接池、Context 乱传导致协程永久泄漏、大对象未流式处理导致 OOM；
-  3. **底层框架与三方协议黑盒陷阱**：ORM 隐式默认值覆盖、JSON 反序列化精度丢失 (64-bit int 溢出)、第三方 API 乱序回调；
-  4. **状态机隐蔽非法跃迁**：复杂业务逆向流遗漏、超时 Worker 扫描并发覆盖已完成状态。
-
-### 5.2 标准案例复盘模板 (`case_YYYYMMDD_<topic>.md`)
-
-```markdown
-# 🩺 经典故障复盘与避坑档案：[简明主题，如：高并发下订单状态分布式竞态与脏读覆盖]
-
-## 1. 案例基本信息
-- **发生时间**：2026-XX-XX
-- **影响范围**：[如：支付回调与用户主动取消并发时，极小概率导致订单状态卡死在中间态]
-- **严重定级**：P1 (核心交易资损隐患) / P2 (核心链路异常)
-- **对应提交 Commit**：`fix(order): 采用 Redis Lua 分布式原子锁化解状态跃迁竞态`
-
-## 2. 故障现象与隐蔽触发路径 (Symptom & Hidden Path)
-- **现象描述**：[精准描述线上出现的诡异报错或数据异常]
-- **触发路径**：
-  ```text
-  第三方支付异步回调 (goroutine A) ───┐
-                                     ├──> 几乎同时触发 UpdateOrderStatus() ──> 发生并发脏写覆盖
-  用户端在超时前一秒点击取消 (goroutine B) ┘
-  ```
-- **为什么极难发现**：本地单并发测试 100% 正常，只有在网络延迟抖动且并发达到峰值时才会偶发触发。
-
-## 3. 根本原因机理剖析 (Root Cause Analysis)
-- **直接诱因**：数据库更新语句使用了绝对值赋值 `status = 2`，而非基于状态机当前版本的条件 CAS 更新；
-- **深层架构根因**：缺乏跨服务分布式悲观防重锁，业务编排层在读取订单后到写入之间存在 80ms 的外部 RPC 耗时窗口，造成典型的“TOCTOU”竞态漏洞。
-
-## 4. ❌ 错误反例代码 vs ✅ 稳健解法对比 (Code Diff)
-
-### ❌ 危险脆弱写法 (引发故障的代码)
-```go
-// 错误：读取与更新非原子，中间有外部耗时操作，极易并发脏写
-order, _ := l.svcCtx.OrderModel.FindOne(l.ctx, req.OrderId)
-res, _ := l.svcCtx.PaymentRpc.Verify(l.ctx, req.PayId)
-order.Status = enums.OrderStatusPaid
-_ = l.svcCtx.OrderModel.Update(l.ctx, order)
-```
-
-### ✅ 优雅免疫写法 (修复后的代码)
-```go
-// 正确：引入 Redis Lua 分布式原子锁 + 数据库乐观锁版本断言
-lockKey := fmt.Sprintf("lock:order:%d", req.OrderId)
-acquire, err := l.svcCtx.Redis.SetnxEx(l.ctx, lockKey, "1", 5)
-if !acquire {
-    return errorx.NewBizError(errorx.ErrCodeConflict, "订单正在处理中，请勿重复操作")
-}
-defer l.svcCtx.Redis.Del(context.Background(), lockKey)
-
-affected, err := l.svcCtx.OrderModel.TransitStatus(l.ctx, req.OrderId, enums.OrderStatusPaying, enums.OrderStatusPaid)
-```
-
-## 5. 🛡️ 永久免疫防线 (Immunity Guardrails)
-1. **自动化单测防线**：编写了并发度为 50 的 Goroutine 并发竞态压测用例纳入 CI 门禁；
-2. **架构红线收录**：写入 `00_standards/architectural_guardrails.md`，明令禁止在状态机跃迁中省略条件校验。
-
-## 6. 💡 给后续开发与 AI 结对助手的警示箴言 (Key Takeaway)
-> 凡涉及多事件源并发变更同一实体状态时，严禁使用“先查后改”逻辑！必须强制使用分布式锁或 SQL 级原子条件跃迁。
-```
-
----
-
-# 6. 人机双重视角与 Docs-as-Code 规范 (Dual-Audience Design)
-
-```text
-┌────────────────────────────────────────────────────────────────────────┐
-│                        项目技术文档库 (docs/)                          │
-├───────────────────────────────────┬────────────────────────────────────┤
-│     面向人类工程师 (Human-Facing) │      面向 AI Agent (Agent-Facing)  │
-├───────────────────────────────────┼────────────────────────────────────┤
-│ • 业务全景与产品需求背景          │ • 领域核心实体与术语映射字典       │
-│ • 核心物理拓扑与架构时序图        │ • 关键代码路径映射表 (Path Mapping)│
-│ • 接口请求/响应契约手册           │ • 架构决策记录 (ADR / Why & Gotchas│
-│ • 开发者本地运行与部署配置指引    │ • 模块扩展模板与工程硬红线速查     │
-└───────────────────────────────────┴────────────────────────────────────┘
-```
-
-### Docs-as-Code 强同步铁律 (Doc Drift Prevention)
-- **同生命周期同 Commit 提交**：当对核心数据表字段、枚举、有限状态机（FSM）或统一接口进行重构时，**必须在同一个 Commit 中同步修改对应的文档**；
-- 严禁“先上线代码，下周再补文档”的技术债延期行为，保证文档即真实系统代码镜像。
-
----
-
-# 7. Mermaid 图表渲染防坑 4 大铁律 (Zero-Crash Diagramming)
-
-> 🚨 **核心红线（全系统适用）**：
-> 编写任何 Mermaid 图表时，**必须 100% 遵守以下 4 大绝对红线**，彻底根除语法崩溃！
-
-### 🚫 铁律 1：严禁菱形/判断节点嵌套花括号 `{...}`
-- **崩溃根因**：Mermaid 中 `{` 和 `}` 是菱形判断节点的形状语法（如 `DECISION{"是否有效?"}`）。若在节点文本内再次出现花括号，AST 词法分析器会当场发生死循环或抛出致命 Syntax Error。
-- ❌ **严禁写法**：`DECISION{"检查租户: {tenant_id}"}` 或 `A{"status in {1,2}}"}`
-- ✅ **标准写法**：`DECISION["检查租户: <tenant_id>"]` 或 `DECISION{"检查租户: tenant_id"}`
-
-### 🚫 铁律 2：连线条件 `|...|` 必须为纯文本
-- **崩溃根因**：连线管道符 `-->|条件|` 内部严禁包含中英文圆括号 `()`、逗号 `,`、分号 `;`、冒号 `:` 等特殊符号，否则许多预览器会中断连线解析。
-- ❌ **严禁写法**：`-->|超时未响应 (超过 30s)|` 或 `-->|错误码 (如 404, 500)|`
-- ✅ **标准写法**：`-->|超时超过 30 秒|` 或 `-->|请求发生错误|`
-
-### 🚫 铁律 3：所有节点 Label 文本强制显式双引号包裹
-- **崩溃根因**：节点文本若包含空格、英文冒号 `:`、斜杠 `/`、或 SQL 关键字（如 `IN`、`WHERE`），若无双引号包裹，会被解析器误识别为节点属性或图形标记。
-- ❌ **严禁写法**：`NODE[URL: /api/v1/user]` 或 `DB[(SELECT * FROM users)]`
-- ✅ **标准写法**：`NODE["URL: /api/v1/user"]` 或 `DB[("SELECT * FROM users")]`
-
-### 🚫 铁律 4：连线与容器约束 (精确连接到节点 ID)
-- **崩溃根因**：箭头只能连接到具体的节点 ID，**严禁直接将连线箭头连向 `subgraph` 容器名称**；同时仅使用各大平台均标准支持的图表类型（如 `flowchart TD/LR`、`sequenceDiagram`、`stateDiagram-v2`、`classDiagram`、`erDiagram`）。
-- ❌ **严禁写法**：`A["发起请求"] --> BackendCluster`（其中 `BackendCluster` 是一个 `subgraph`）
-- ✅ **标准写法**：`A["发起请求"] --> GatewayNode`（精确连接至 `subgraph` 内部的第一个入口节点 ID）
-
----
-
-# 8. 标准 Mermaid 范式示例 (Safe Templates)
-
-### 8.1 安全架构流程图范式 (Safe Flowchart)
-```mermaid
-flowchart TD
-    Client["终端客户端 (Web/App)"] -->|"发起业务请求"| Gateway["API 网关服务"]
-    Gateway -->|"路由鉴权通过"| Handler["Logic 业务编排层"]
-    Handler -->|"查询缓存"| Cache[("Redis 缓存集群")]
-    Handler -->|"缓存未命中回源"| DB[("MySQL 主从数据库")]
-    
-    Handler --> Decision{"数据是否存在?"}
-    Decision -->|"是"| ReturnSuccess["返回标准成功响应"]
-    Decision -->|"否"| ReturnNotFound["返回 404 业务错误"]
-```
-
-### 8.2 安全时序图范式 (Safe Sequence Diagram)
-```mermaid
-sequenceDiagram
-    autonumber
-    participant C as "客户端"
-    participant G as "网关层"
-    participant S as "微服务 Logic"
-    participant R as "Redis 缓存"
-
-    C->>G: 发起 HTTP POST 请求
-    G->>G: 验证 JWT 并注入上下文头
-    G->>S: 透传请求 (携带 X-Request-ID)
-    S->>R: 读取分布式缓存
-    alt 缓存命中
-        R-->>S: 返回缓存数据
-    else 缓存缺失
-        S->>S: 查询数据库并安全回写缓存
-    end
-    S-->>C: 统一返回标准响应 {"code": 0, "msg": "ok"}
-```
-
----
-
-# 9. 项目轻量元指针地图规范 (Agent Pointer Map & SSOT Architecture)
-
-为彻底解决长会话上下文膨胀、绝对行号偏移失效与正文混杂问题，本规范确立 **“单一数据源 (SSOT)、物理作用域明确与章节语义锚点自愈”** 的知识治理架构。
-
-### 9.1 核心文件物理作用域解析协议 (Scope Resolution Protocol)
-在系统与 Agent 交互中，必须明确区分**会话期热状态**与**项目级冷知识**的物理归宿，严禁路径混淆：
-
-| 文件类别 | 物理作用域与绝对路径 | 生命周期与清理策略 |
+| 场景模块 | 参考子文档 | 核心涵盖规范 |
 | :--- | :--- | :--- |
-| **会话微任务跟踪<br/>`implementation_plan.md`** | **【会话私有工件目录】**<br/>`<conversation_artifact_dir>/implementation_plan.md`<br/>(系统环境变量动态注入，如 `~/.gemini/antigravity-ide/brain/<id>/`) | 仅供当前长会话抗遗忘与步骤追踪。**严禁写进项目工作区代码库**！任务完成即归档。 |
-| **项目知识指针地图<br/>`PROJECT_MAP.md`** | **【项目根目录专属】**<br/>`${WORKSPACE_ROOT}/.agents/PROJECT_MAP.md`<br/>(以当前操作代码工程的 `.git` / `go.mod` 根目录为基准) | 永久性项目级轻量元知识。随代码仓库进行版本管理，对人类 `docs/` 零侵入。 |
-
----
-
-### 9.2 “章节语义锚点为主，预估行号为辅自愈”规约 (Semantic Anchor + Self-Healing)
-绝对行号属于“脆弱指针 (Brittle Pointer)”，他人增删数行即可导致行号错位。因此，指针格式**强制要求同时包含 Markdown 章节标题与预估行号**：
-
-```markdown
-<!-- ❌ 脆弱写法（禁止）：纯行号无锚点，极易错位失效 -->
-- 订单状态机: [order.md](file:///docs/order.md#L45-L120)
-
-<!-- ✅ 生产级自愈写法（强制）：章节语义锚点 + 预估行号区间 + 锚点全文校验词 -->
-- 订单流转与有限状态机:
-  👉 [order_state.md#3.2-状态流转矩阵](file://${WORKSPACE_ROOT}/docs/business/order_state.md#3.2-状态流转矩阵) (约 L45-L90，锚点: `## 3.2 状态流转矩阵`)
-```
-
-#### Agent 调阅与 0 误差自愈 SOP (Self-Healing SOP)
-1. **预估区间切片调阅**：Agent 先通过预估行号区间（如 L45-L90）调用 `view_file(StartLine, EndLine)` 获取内容；
-2. **锚点校验断言**：Agent 校验切片内容首部是否包含声明的锚点（如 `## 3.2 状态流转矩阵`）；
-3. **行号偏移自动修正**：若切片未命中锚点（说明文档曾被他人修改致使行号偏移），Agent **严禁盲目读取错误内容，必须立即在原文件中快速检索该锚点行号并重新精准切片**，实现 100% 自动容错与自愈。
-
----
-
-### 9.3 `.agents/PROJECT_MAP.md` 标准模板
-每个工程根目录的 `.agents/PROJECT_MAP.md` 仅充当**逻辑指针与锚点导航**，总体规模严格控制在 100 行以内：
-
-```markdown
-# 🧭 项目架构与领域知识元指针地图 (Agent Index Map)
-
-> 🚨 本文件仅充当逻辑指针，严禁冗余拷贝正文。需要某块知识时，顺着章节锚点与行号精准切片读取原文档。
-
-## 1. 核心流量入口与领域状态机 (Domain State Machines)
-- **订单流转与有限状态机**: 
-  👉 [order_state_machine.md#2.1-状态扭转矩阵](file://${WORKSPACE_ROOT}/docs/business/order_state_machine.md#2.1-状态扭转矩阵) (约 L45-L120，锚点: `## 2.1 状态扭转矩阵`)
-- **API 统一契约与全局错误码**: 
-  👉 [api_spec.md#1.2-通用响应结构](file://${WORKSPACE_ROOT}/docs/api/user.md#1.2-通用响应结构) (约 L10-L60，锚点: `## 1.2 通用响应结构`)
-
-## 2. 基础设施与存储持久化 (Infrastructure & Storage)
-- **MySQL 核心表索引与分表规划**: 
-  👉 [database_schema.md#3.1-用户主表索引设计](file://${WORKSPACE_ROOT}/docs/db/schema.md#3.1-用户主表索引设计) (约 L80-L150，锚点: `## 3.1 用户主表索引设计`)
-- **Redis 键命名空间与分布式锁前缀**: 
-  👉 遵循全局 `redis-mastery`，项目实参参见 [cache_spec.md#2.0-锁键前缀](file://${WORKSPACE_ROOT}/docs/infra/cache.md#2.0-锁键前缀) (约 L20-L55，锚点: `## 2.0 锁键前缀`)
-
-## 3. 历史高危避坑与复盘索引 (Post-Mortem Pointers)
-- **2026-09 分布式锁死锁与环境串味事故**: 
-  👉 [2026-09-lock.md](file://${WORKSPACE_ROOT}/docs/post-mortems/2026-09-lock.md) (排查同类死锁问题前必读)
-- **2026-08 消费端 QoS 缺失雪崩事故**: 
-  👉 [2026-08-rabbitmq-qos.md](file://${WORKSPACE_ROOT}/docs/post-mortems/2026-08-rabbitmq-qos.md)
-```
-
-
+| **Diátaxis 架构与分层** | [01_diataxis_framework_and_hierarchy.md](references/01_diataxis_framework_and_hierarchy.md) | • 智能目录探测 (Folder Discovery)<br>• Diátaxis 四象限显式编号目录树规范与 00 号总纲 |
+| **MADR 架构决策记录** | [02_madr_architectural_decision_records.md](references/02_madr_architectural_decision_records.md) | • MADR 标准架构决策记录结构<br>• 提议/采纳/废弃状态流转与否决权衡沉淀 |
+| **故障复盘与避坑档案** | [03_post_mortems_and_immunity_cases.md](references/03_post_mortems_and_immunity_cases.md) | • 高价值案例甄选门槛 (排障抗体)<br>• 根因剖析、反例对比与永久免疫标准模版 |
+| **Mermaid 防崩四大铁律** | [04_mermaid_four_zero_crash_rules.md](references/04_mermaid_four_zero_crash_rules.md) | • 菱形节点禁嵌套花括号、连线纯文本<br>• 文本双引号与精确节点 ID 安全时序图范式 |
+| **三态治理与元指针地图** | [05_three_tier_documentation_and_project_map.md](references/05_three_tier_documentation_and_project_map.md) | • 规则态 vs 知识库态 vs 瞬态工件三态模型<br>• `<project>/.agents/rules/` 语义锚点自愈规范 |
